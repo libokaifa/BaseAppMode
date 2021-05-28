@@ -1,2 +1,6 @@
 rootProject.name = "BaseAppModel"
 include ':app'
+include ':base'
+include ':common'
+include ':webview'
+include ':usercenter'

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.libo.webview">
+
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <application android:usesCleartextTraffic="true">
+        <activity android:name=".WebViewActivity"
+            android:process=":libowebview"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
+        <service android:name=".mainprocess.MainProcessCommandService"/>
+    </application>
+</manifest>
