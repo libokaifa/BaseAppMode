@@ -7,7 +7,7 @@ import android.widget.Toast;
 
 import com.google.auto.service.AutoService;
 import com.libo.base.baseapp.BaseApplication;
-import com.libo.common.logger.LiboLoger;
+
 import com.libo.webview.ICallbackFromMainprocessToWebViewProcessInterface;
 import com.libo.webview.command.Command;
 import com.orhanobut.logger.Logger;

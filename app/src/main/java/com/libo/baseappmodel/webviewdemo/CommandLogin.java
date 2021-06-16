@@ -7,9 +7,10 @@ import com.alibaba.fastjson.JSON;
 import com.google.auto.service.AutoService;
 
 import com.libo.base.autoservice.LiboServiceLoader;
+import com.libo.base.util.LiboLoger;
 import com.libo.common.autoservice.IUserCenterService;
 import com.libo.common.eventbus.LoginEvent;
-import com.libo.common.logger.LiboLoger;
+
 import com.libo.webview.ICallbackFromMainprocessToWebViewProcessInterface;
 import com.libo.webview.command.Command;
 

@@ -33,10 +33,10 @@ android {
     dataBinding {
         enabled true
     }
+    sourceSets { main { java.srcDirs = ['src/main/java', 'src/main/aidl'] } }
 }
 
 dependencies {
-    implementation "androidx.appcompat:appcompat:$rootProject.androidXVersion"
     api project(":common")
     api files('libs/tbs_sdk_thirdapp_v4.3.0.93_43993_sharewithdownloadwithfile_withoutGame_obfs_20210220_114728.jar')
     annotationProcessor rootProject.googleAutoServiceDependency

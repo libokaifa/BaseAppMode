@@ -9,7 +9,8 @@ import com.libo.base.loadsir.EmptyCallback;
 import com.libo.base.loadsir.ErrorCallback;
 import com.libo.base.loadsir.LoadingCallback;
 import com.libo.base.loadsir.TimeoutCallback;
-import com.libo.common.logger.LiboLoger;
+
+import com.libo.base.util.LiboLoger;
 import com.orhanobut.logger.AndroidLogAdapter;
 import com.orhanobut.logger.FormatStrategy;
 import com.orhanobut.logger.Logger;
