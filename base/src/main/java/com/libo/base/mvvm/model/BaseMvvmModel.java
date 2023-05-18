@@ -32,10 +32,10 @@ public abstract class BaseMvvmModel<NETWORK_DATA, RESULT_DATA> implements MvvmDa
     private String mCachedPreferenceKey;
     private String mApkPredefinedData;
 
-    public BaseMvvmModel(boolean isPaging, String cachedPreferenceKey, String apkPredefinedData, int... initPageNumber) {
+    public BaseMvvmModel(boolean isPaging, String cachedPreferenceKey, String apkPredefinedData, int initPageNumber) {
         this.mIsPaging = isPaging;
-        if (isPaging && initPageNumber != null && initPageNumber.length > 0) {
-            INIT_PAGE_NUMBER = initPageNumber[0];
+        if (isPaging ) {
+            INIT_PAGE_NUMBER = initPageNumber;
         } else {
             INIT_PAGE_NUMBER = -1;
         }
@@ -43,7 +43,7 @@ public abstract class BaseMvvmModel<NETWORK_DATA, RESULT_DATA> implements MvvmDa
         this.mApkPredefinedData = apkPredefinedData;
     }
 
-    public void register(IBaseModelListener listener) {
+    public void register(IBaseModelListener<RESULT_DATA> listener) {
         if (listener != null) {
             mReferenceIBaseModelListener = new WeakReference<>(listener);
         }
@@ -89,8 +89,7 @@ public abstract class BaseMvvmModel<NETWORK_DATA, RESULT_DATA> implements MvvmDa
                             return;
                         }
                     } catch (JSONException e) {
-                        Log.e("BaseMvvmModel",e.getMessage());
-                        //e.printStackTrace();
+                        e.printStackTrace();
                     }
                 }
 
@@ -113,9 +112,9 @@ public abstract class BaseMvvmModel<NETWORK_DATA, RESULT_DATA> implements MvvmDa
         if (listener != null) {
             // notify
             if (mIsPaging) {
-                listener.onLoadSuccess(this, resultData, new PagingResult(mPage == INIT_PAGE_NUMBER, resultData == null ? true : ((List) resultData).isEmpty(), ((List) resultData).size() > 0));
+                listener.onLoadSuccess( resultData, new PagingResult(mPage == INIT_PAGE_NUMBER, resultData == null ? true : ((List) resultData).isEmpty(), ((List) resultData).size() > 0));
             } else {
-                listener.onLoadSuccess(this, resultData);
+                listener.onLoadSuccess( resultData,null);
             }
 
             // save resultData to preference
@@ -145,9 +144,9 @@ public abstract class BaseMvvmModel<NETWORK_DATA, RESULT_DATA> implements MvvmDa
         IBaseModelListener listener = mReferenceIBaseModelListener.get();
         if (listener != null) {
             if (mIsPaging) {
-                listener.onLoadFail(this, errorMessage, new PagingResult(mPage == INIT_PAGE_NUMBER, true, false));
+                listener.onLoadFail( errorMessage, new PagingResult(mPage == INIT_PAGE_NUMBER, true, false));
             } else {
-                listener.onLoadFail(this, errorMessage);
+                listener.onLoadFail(errorMessage,null);
             }
         }
         mIsLoading = false;

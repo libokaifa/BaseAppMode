@@ -3,6 +3,10 @@ package com.libo.webview;
 import android.os.Bundle;
 import android.view.View;
 
+import com.alibaba.android.arouter.facade.annotation.Autowired;
+import com.alibaba.android.arouter.facade.annotation.Route;
+import com.alibaba.android.arouter.launcher.ARouter;
+import com.libo.router.webview.WebViewPath;
 import com.libo.webview.databinding.ActivityWebviewBinding;
 import com.libo.webview.utils.Constants;
 
@@ -20,15 +24,22 @@ import androidx.fragment.app.FragmentTransaction;
  * @create 2021/5/28 10:26 上午
  * @describe:
  */
+@Route(path= WebViewPath.Web_ACTIVITY)
 public class WebViewActivity extends AppCompatActivity {
      private ActivityWebviewBinding mBing;
-
+     @Autowired
+     public  String  title;
+     @Autowired
+     public  boolean isShowActionBar;
+     @Autowired
+     public  String  url;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ARouter.getInstance().inject(this);
         mBing= DataBindingUtil.setContentView(this,R.layout.activity_webview);
-        mBing.title.setText(getIntent().getStringExtra(Constants.TITLE));
-        mBing.actionBar.setVisibility(getIntent().getBooleanExtra(Constants.IS_SHOW_ACTION_BAR,true)? View.VISIBLE:View.GONE);
+        mBing.title.setText(title);
+        mBing.actionBar.setVisibility(isShowActionBar? View.VISIBLE:View.GONE);
         mBing.back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -37,7 +48,7 @@ public class WebViewActivity extends AppCompatActivity {
         });
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction transaction = fragmentManager.beginTransaction();
-        Fragment fragment = WebViewFragment.newInstance(getIntent().getStringExtra(Constants.URL), true);
+        Fragment fragment = WebViewFragment.newInstance(url, true);
         transaction.replace(R.id.web_view_fragment, fragment).commit();
     }
 

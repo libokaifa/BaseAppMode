@@ -1,29 +1,37 @@
 package com.libo.baseappmodel;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.databinding.DataBindingUtil;
+import androidx.navigation.NavController;
+import androidx.navigation.fragment.NavHostFragment;
+import androidx.navigation.ui.NavigationUI;
 
-import android.os.Bundle;
-import android.view.View;
-
-import com.libo.base.autoservice.LiboServiceLoader;
+import com.blankj.utilcode.util.BarUtils;
+import com.libo.base.mvvm.view.BaseMvvmActivity;
 import com.libo.baseappmodel.databinding.ActivityMainBinding;
-import com.libo.common.autoservice.IWebViewService;
 
-public class MainActivity extends AppCompatActivity {
-    private  ActivityMainBinding  activityMainBinding;
+public class  MainActivity extends BaseMvvmActivity<ActivityMainBinding,MainActivityVm> {
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        activityMainBinding=  DataBindingUtil.setContentView(this,R.layout.activity_main);
-        activityMainBinding.tvWebview.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                IWebViewService webViewService= LiboServiceLoader.load(IWebViewService.class);
-                if (webViewService!=null){
-                    webViewService.startDemoHtml(MainActivity.this);
-                }
-            }
-        });
+    public int getLayoutId() {
+        return R.layout.activity_main;
+    }
+
+    @Override
+    public int initViewModeId() {
+        return BR.vm;
+    }
+
+    @Override
+    public void onViewCreate() {
+        NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.my_nav_host_fragment);
+        NavController controller = navHostFragment.getNavController();
+        NavigationUI.setupWithNavController(viewDataBinding.navView,controller);
+        BarUtils.transparentStatusBar(this);
+        BarUtils.setStatusBarLightMode(this,true);
+    }
+
+    @Override
+    public void initLiveDataLister() {
+        super.initLiveDataLister();
+
     }
 }

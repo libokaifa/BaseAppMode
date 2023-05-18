@@ -1,13 +1,19 @@
 apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
 android {
     compileSdkVersion rootProject.compileSdkVersion
     buildToolsVersion rootProject.buildToolsVersion
+    dataBinding.enabled = true
+    lintOptions.abortOnError = false
+
     defaultConfig {
-        applicationId "com.libo.baseappmodel"
-        minSdkVersion rootProject.minSdkVersion
-        targetSdkVersion rootProject.targetSdkVersion
-        versionCode 1
-        versionName "1.0"
+        applicationId rootProject.ext.applicationId
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        versionCode rootProject.ext.versionCode
+        versionName rootProject.ext.versionName
+
     }
 
     buildTypes {
@@ -33,9 +39,11 @@ android {
 }
 
 dependencies {
-    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
-    implementation project(":webview")
-    implementation project(":usercenter")
+    api project(":webview")
+    api project(":usercenter")
+    api project(":homemodel")
+
+    implementation rootProject.constraintlayout
     annotationProcessor rootProject.googleAutoServiceDependency
     implementation rootProject.googleAutoServiceDependency
 }

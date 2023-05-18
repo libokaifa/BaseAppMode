@@ -2,14 +2,17 @@ package com.libo.network.observer;
 
 
 
+import androidx.annotation.NonNull;
+
 import com.libo.base.mvvm.model.BaseMvvmModel;
 import com.libo.base.mvvm.model.MvvmDataObserver;
+import com.libo.network.bean.BaseResponse;
 import com.libo.network.errorhand.ExceptionHandle;
 
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
 
-public class BaseObserver<T> implements Observer<T> {
+public class BaseObserver<T> implements Observer<BaseResponse<T>> {
     BaseMvvmModel baseModel;
     MvvmDataObserver<T> mvvmDataObserver;
     public BaseObserver(BaseMvvmModel baseModel, MvvmDataObserver<T> mvvmDataObserver) {
@@ -25,9 +28,12 @@ public class BaseObserver<T> implements Observer<T> {
     }
 
     @Override
-    public void onNext(T t) {
-        mvvmDataObserver.onSuccess(t, false);
+    public void onNext(@NonNull BaseResponse<T> tBaseResponse) {
+        mvvmDataObserver.onSuccess(tBaseResponse.data, false);
     }
+
+
+
 
     @Override
     public void onError(Throwable e) {

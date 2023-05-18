@@ -3,6 +3,7 @@ package com.libo.network;
 import com.libo.network.base.NetWorkApi;
 import com.libo.network.bean.BaseResponse;
 import com.libo.network.errorhand.ExceptionHandle;
+import com.orhanobut.logger.Logger;
 
 import io.reactivex.functions.Function;
 import okhttp3.Interceptor;
@@ -46,10 +47,10 @@ public class LiBoNetWorkApi extends NetWorkApi {
             @Override
             public T apply(T response) throws Exception {
                 //response中code码不会0 出现错误
-                if (response instanceof BaseResponse && ((BaseResponse) response).showapiResCode != 0) {
+                if (response instanceof BaseResponse && ((BaseResponse) response).errorCode != 0) {
                     ExceptionHandle.ServerException exception = new ExceptionHandle.ServerException();
-                    exception.code = ((BaseResponse) response).showapiResCode;
-                    exception.message = ((BaseResponse) response).showapiResError != null ? ((BaseResponse) response).showapiResError : "";
+                    exception.code = ((BaseResponse) response).errorCode;
+                    exception.message = ((BaseResponse) response).errorMsg != null ? ((BaseResponse) response).errorMsg : "";
                     throw exception;
                 }
                 return response;
@@ -59,11 +60,13 @@ public class LiBoNetWorkApi extends NetWorkApi {
 
     @Override
     public String getRealse() {
-        return "http:/fff/";
+        Logger.e("Realse");
+        return "https://www.wanandroid.com/";
     }
 
     @Override
     public String getTest() {
-        return "http://service-o5ikp40z-1255468759.ap-shanghai.apigateway.myqcloud.com/";
+        Logger.e("debug");
+        return "https://www.wanandroid.com/";
     }
 }

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/page1Fragment"
+        android:icon="@drawable/one_main"
+        android:title="net"/>
+    <item
+        android:id="@+id/page2Fragment"
+        android:icon="@drawable/two_main"
+        android:title="webview"/>
+    <item
+        android:id="@+id/page3Fragment"
+        android:icon="@drawable/three_main"
+        android:title="项目"/>
+    <item
+        android:id="@+id/page4Fragment"
+        android:icon="@drawable/fore_main"
+
+        android:title="我的"/>
+</menu>

@@ -85,10 +85,13 @@ public class CommonResponseInterceptor implements Interceptor {
             map.put("method",method);
             map.put("headers",headers);
             map.put("request body",requestBody);
+
+            map.put("responseCode",responseCode);
             map.put("message",responseMessage);
             map.put("response body",requestBody);
             map.put("take time",requestTime);
             LiboLoger.logJson(JSON.toJSONString(map));
+            LiboLoger.logJson(responseBody);
         }
 
 

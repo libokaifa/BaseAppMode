@@ -1,17 +1,25 @@
 plugins {
     id 'com.android.library'
 }
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
 
 android {
     compileSdkVersion rootProject.compileSdkVersion
     buildToolsVersion rootProject.buildToolsVersion
-
+    dataBinding.enabled = true
+    lintOptions.abortOnError = false
     defaultConfig {
         minSdkVersion rootProject.minSdkVersion
         targetSdkVersion rootProject.targetSdkVersion
         versionCode 1
         versionName "1.0"
-
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [ AROUTER_MODULE_NAME : project.getName() ]
+            }
+        }
         consumerProguardFiles "consumer-rules.pro"
     }
     buildTypes {
@@ -39,6 +47,9 @@ android {
 dependencies {
     api project(":common")
     api files('libs/tbs_sdk_thirdapp_v4.3.0.93_43993_sharewithdownloadwithfile_withoutGame_obfs_20210220_114728.jar')
+    api rootProject.arouterApi
+    kapt rootProject.arouterCompiler
+    annotationProcessor rootProject.arouterCompiler
     annotationProcessor rootProject.googleAutoServiceDependency
     implementation rootProject.googleAutoServiceDependency
 }
