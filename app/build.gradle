@@ -42,7 +42,7 @@ dependencies {
     api project(":webview")
     api project(":usercenter")
     api project(":homemodel")
-
+    api project(":room")
     implementation rootProject.constraintlayout
     annotationProcessor rootProject.googleAutoServiceDependency
     implementation rootProject.googleAutoServiceDependency

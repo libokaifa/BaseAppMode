@@ -29,4 +29,11 @@ android {
 
 dependencies {
     api project(":common")
+
+    def room_version = "2.0.0-beta01"
+    api "androidx.room:room-runtime:$room_version"
+    annotationProcessor "androidx.room:room-compiler:$room_version"
+    api "androidx.room:room-rxjava2:$room_version"
+    api "androidx.room:room-guava:$room_version"
+    testImplementation "androidx.room:room-testing:$room_version"
 }

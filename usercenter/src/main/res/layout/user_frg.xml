@@ -13,7 +13,7 @@
     android:layout_height="match_parent">
    <TextView
        android:layout_width="wrap_content"
-       android:text="user"
+       android:text="永远对未来热泪盈眶"
        android:layout_gravity="center"
        android:layout_height="wrap_content">
    </TextView>

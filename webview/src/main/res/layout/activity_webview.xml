@@ -14,8 +14,9 @@
 
             <ImageView
                 android:id="@+id/back"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_width="@dimen/dimen_30dp"
+                android:layout_height="@dimen/dimen_30dp"
                 android:layout_alignParentLeft="true"
                 android:layout_marginTop="5dp"
                 android:layout_marginBottom="5dp"
@@ -26,7 +27,7 @@
 
 
             <TextView
-                android:layout_toRightOf="@+id/back"
+                android:layout_marginHorizontal="@dimen/dimen_80dp"
                 android:id="@+id/title"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"

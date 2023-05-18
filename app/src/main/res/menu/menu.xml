@@ -11,7 +11,7 @@
     <item
         android:id="@+id/page3Fragment"
         android:icon="@drawable/three_main"
-        android:title="项目"/>
+        android:title="room"/>
     <item
         android:id="@+id/page4Fragment"
         android:icon="@drawable/fore_main"

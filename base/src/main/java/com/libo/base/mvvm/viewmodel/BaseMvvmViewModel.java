@@ -1,10 +1,13 @@
 package com.libo.base.mvvm.viewmodel;
 
+import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleObserver;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.OnLifecycleEvent;
 import androidx.lifecycle.ViewModel;
+
+import com.libo.base.baseapp.BaseApplication;
 import com.libo.base.mvvm.model.BaseMvvmModel;
 import io.reactivex.disposables.CompositeDisposable;
 
@@ -21,6 +24,7 @@ public abstract class BaseMvvmViewModel extends ViewModel implements LifecycleOb
 
 
     public BaseMvvmViewModel() {
+
         initDataModel();
     }
 
