@@ -1,6 +1,10 @@
 package com.libo.usercenter;
 
+import android.content.Intent;
+import android.view.View;
+
 import com.libo.base.mvvm.view.BaseMvvmFragment;
+import com.libo.network.netpath.NetPathActivity;
 import com.libo.usercenter.databinding.UserFrgBinding;
 
 /**
@@ -21,6 +25,11 @@ public class UserFrg extends BaseMvvmFragment<UserFrgBinding,UserFrgVm> {
 
     @Override
     protected void onViewCreated() {
-
+        viewDataBinding.btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getActivity().startActivity(new Intent(getActivity(),NetPathActivity.class));
+            }
+        });
     }
 }

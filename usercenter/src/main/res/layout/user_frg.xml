@@ -17,5 +17,11 @@
        android:layout_gravity="center"
        android:layout_height="wrap_content">
    </TextView>
+    <Button
+        android:id="@+id/btn"
+        android:text="环境切换"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_66dp">
+    </Button>
 </FrameLayout>
 </layout>
