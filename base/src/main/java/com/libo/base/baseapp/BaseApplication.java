@@ -7,6 +7,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 
 import com.libo.base.util.AppManager;
+import com.libo.base.util.ExceptionHelper;
 
 /**
  * /**
@@ -23,6 +24,11 @@ public class BaseApplication extends Application {
         super.onCreate();
         mApplication=this;
         setApplication(this);
+        initCrash();
+    }
+    public  void  initCrash(){
+        ExceptionHelper.getInstance().init(true,this).register();
+
     }
     /**
      * 当主工程没有继承BaseApplication时，可以使用setApplication方法初始化BaseApplication
