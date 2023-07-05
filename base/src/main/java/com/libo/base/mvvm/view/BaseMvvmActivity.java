@@ -33,6 +33,8 @@ import com.libo.base.widgets.dialog.CustomProgressDialog;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 
+import javax.xml.parsers.SAXParser;
+
 /**
  * @Description TODO
  * @Author libo
@@ -55,6 +57,7 @@ public abstract class BaseMvvmActivity <V extends ViewDataBinding, VM extends Ba
         if (type instanceof ParameterizedType){
             modelClass= (Class<BaseMvvmViewModel>) ((ParameterizedType) type).getActualTypeArguments()[1];
         }else {
+            //如果没有指定泛型参数，则默认使用BaseMvvmViewModel
             modelClass=BaseMvvmViewModel.class;
         }
 
@@ -77,20 +80,25 @@ public abstract class BaseMvvmActivity <V extends ViewDataBinding, VM extends Ba
                 EventBusUtils.register(this);
             }
         }
-
         mActivity=this;
-        viewDataBinding = DataBindingUtil.setContentView(this, getLayoutId());
+        initViewDataBinding(savedInstanceState);
         initLoadSir();
-        viewModel = getViewModel();
-        getLifecycle().addObserver(viewModel);
-        viewDataBinding.setVariable(initViewModeId(),viewModel);
-        viewDataBinding.setLifecycleOwner(this);
         onViewCreate();
         initLiveDataLister();
         LogUtils.e("pageName", "当前启动的Activity名称为: "+getClass().getSimpleName());
 
     }
-
+    // 注入绑定
+    private void initViewDataBinding(Bundle savedInstanceState){
+        viewDataBinding = DataBindingUtil.setContentView(this, getLayoutId());
+        viewModel = getViewModel();
+        // 关联viewModel
+        viewDataBinding.setVariable(initViewModeId(),viewModel);
+        //支持LiveData绑定xml，数据改变，UI自动会更新
+        viewDataBinding.setLifecycleOwner(this);
+        //让ViewModel拥有View的生命周期感应
+        getLifecycle().addObserver(viewModel);
+    }
 
 
     public void initLiveDataLister(){

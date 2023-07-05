@@ -80,10 +80,7 @@ public abstract class BaseMvvmFragment<V extends ViewDataBinding, VM extends Bas
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         showLoad();
-        viewModel = getViewModel();
-        viewDataBinding.setVariable(initViewModeId(), viewModel);
-        getLifecycle().addObserver(viewModel);
-        viewDataBinding.setLifecycleOwner(this);
+        initViewDataBinding(savedInstanceState);
         viewModel.viewStatusLiveData.observe(getViewLifecycleOwner(), this);
         onViewCreated();
         if (this.getClass().isAnnotationPresent(BindEventBus.class)) {//加上判断
@@ -91,7 +88,16 @@ public abstract class BaseMvvmFragment<V extends ViewDataBinding, VM extends Bas
         }
         initLiveDataLister();
     }
-
+    // 注入绑定
+    private void initViewDataBinding(Bundle savedInstanceState){
+        viewModel = getViewModel();
+        // 关联viewModel
+        viewDataBinding.setVariable(initViewModeId(),viewModel);
+        //支持LiveData绑定xml，数据改变，UI自动会更新
+        viewDataBinding.setLifecycleOwner(this);
+        //让ViewModel拥有View的生命周期感应
+        getLifecycle().addObserver(viewModel);
+    }
     public void initLiveDataLister(){
         viewModel.viewStatusLiveData.observe(getViewLifecycleOwner(),this);
         viewModel.closePage.observe(getViewLifecycleOwner(), new Observer<Boolean>() {
