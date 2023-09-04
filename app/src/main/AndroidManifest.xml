@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.libo.baseappmodel">
+
+    <uses-permission android:name="android.permission.EXPAND_STATUS_BAR" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
@@ -24,6 +26,12 @@
         <activity android:name=".webviewdemo.MainProcessTestActivity">
         </activity>
         <activity android:name=".webviewdemo.MainProcessTestActivityB"></activity>
+        <receiver android:name=".NotificationBroadCastReceiver">
+            <intent-filter>
+                <action android:name="notification_clicked"> </action>
+            </intent-filter>
+
+        </receiver>
     </application>
     <meta-data
         android:name="design_width_in_dp"

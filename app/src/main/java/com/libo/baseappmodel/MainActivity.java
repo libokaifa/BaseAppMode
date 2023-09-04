@@ -1,10 +1,13 @@
 package com.libo.baseappmodel;
 
+import androidx.core.app.NotificationCompat;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.NavigationUI;
 
 import com.blankj.utilcode.util.BarUtils;
+import com.blankj.utilcode.util.NotificationUtils;
+import com.blankj.utilcode.util.Utils;
 import com.libo.base.mvvm.view.BaseMvvmActivity;
 import com.libo.baseappmodel.databinding.ActivityMainBinding;
 
@@ -27,6 +30,8 @@ public class  MainActivity extends BaseMvvmActivity<ActivityMainBinding,MainActi
         NavigationUI.setupWithNavController(viewDataBinding.navView,controller);
         BarUtils.transparentStatusBar(this);
         BarUtils.setStatusBarLightMode(this,true);
+
+
     }
 
     @Override
