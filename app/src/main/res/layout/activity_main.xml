@@ -30,7 +30,12 @@
             android:background="@color/white"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dimen_60dp"
+            app:itemBackground="@null"
+            app:itemHorizontalTranslationEnabled="false"
             app:labelVisibilityMode="labeled"
+            app:itemIconTint="@drawable/bottom_btn_selected_color"
+            app:itemTextAppearanceActive="@style/bottom_selected_text"
+            app:itemTextAppearanceInactive="@style/bottom_normal_text"
             app:menu="@menu/menu"/>
 
 
